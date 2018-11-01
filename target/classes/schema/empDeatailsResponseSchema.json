@@ -1,0 +1,34 @@
+{
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "id": "http://jsonschema.net",
+      "type": "object",
+      "properties": {
+        "empId": {
+          "type": "string",
+           "description":"This is the employee id",
+           "maxLength":5
+        },
+        "deptId": {
+          "type": "string",
+          "description":"This is the department id"
+        },
+        "firstName": {
+          "type": "string",
+          "description":"This is the employee firstName",
+          "maxLength":50
+        },
+        "lastName": {
+          "type": "string",
+          "description":"This is the employee lastName",
+          "maxLength":50
+        },
+         "salary": {
+          "type": "string",
+          "description":"This is the employee salary",
+          "maxLength":12
+        }
+      },
+      "required": [
+        "firstName", "lastName"
+      ]
+    }

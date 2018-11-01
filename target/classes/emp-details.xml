@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <flow name="emp-detailsFlow">
+        <flow-ref name="setEmpIdDeptId" doc:name="setEmpIdDeptId"/>
+        <logger message="This is Query Params --&gt;#[flowVars.empId] and #[flowVars.deptId]" level="INFO" doc:name="Logger"/>
+        <set-payload value="{ &quot;empId&quot;:&quot;100&quot;, &quot;firstName&quot;:&quot;Test123&quot;, &quot;lastName&quot;:&quot;Test1234&quot;, &quot;salary&quot;:&quot;100&quot; }" doc:name="Set Payload"/>
+    </flow>
+    <sub-flow name="setEmpIdDeptId">
+        <set-variable variableName="empId" value="#[message.inboundProperties.'http.query.params'.empId]" doc:name="Variable"/>
+        <set-variable variableName="deptId" value="#[message.inboundProperties.'http.query.params'.deptId]" doc:name="Variable"/>
+    </sub-flow>
+</mule>

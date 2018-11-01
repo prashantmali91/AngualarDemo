@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <apikit:config name="Router" raml="employee.raml" consoleEnabled="true" consolePath="console" doc:name="Router"/>
+    <apikit:config name="Router1" raml="employee.raml" consoleEnabled="true" consolePath="console" doc:name="Router"/>
+    <apikit:config name="Router2" raml="employee.raml" consoleEnabled="true" consolePath="console" doc:name="Router">
+        <apikit:flow-mapping resource="/empDetails" action="get" flow-ref="emp-detailsFlow"/>
+    </apikit:config>
+    <flow name="ea-employeeFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/api/*" doc:name="HTTP"/>
+        <apikit:router config-ref="Router2" doc:name="APIkit Router"/>
+    </flow>
+</mule>

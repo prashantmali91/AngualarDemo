@@ -1,0 +1,20 @@
+#%RAML 0.8
+title: Employee API
+
+
+/empDetails:
+  get:  
+    queryParameters: 
+      empId:
+        type: string
+        required: true
+      deptId:
+        type: string
+        required: true
+        
+    responses: 
+      200: 
+        body: 
+          application/json: 
+            example:  !include example/empDeatailsSample.json
+            schema:   !include schema/empDeatailsResponseSchema.json     
